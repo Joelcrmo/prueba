@@ -16,11 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-//ruta para recoger los datos nuevos
+
+
+Route::get('/mostrar', function () {
+    return view('mostrar');
+});
 Route::get('/preferencias', function () {
     return view('preferencias');
-});
-
-route::get('/mostrar', function () {
-    return view('mostrar');
 });
