@@ -5,15 +5,20 @@
     <title>Preferencias por usuario</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="estilo.css" rel="stylesheet" type="text/css">
+    <link href="/estilo.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
     <div id='login'>
-        <form action='' method='post'>
+        <form action='' method='get'>
             <fieldset>
                 <legend>Preferencias</legend>
-                <div><span class='mensaje'><?php echo $mensaje; ?></span></div>
+                <div><span class='mensaje'>
+                    <php
+                    if(isset($mensaje)){
+                        echo $mensaje;
+                    }
+                    ?>
                 <!-- Recuperamos la información de la sesión -->
                 <div class='campo'>
                     <label class='etiqueta'>Idioma:</label><br />
@@ -34,7 +39,7 @@
                     <input type='submit' name='borrar' value='Borrar preferencias' />
                 </div>
                 <div class='campo'>
-                    <a href="/preferencias.php">Establecer preferencias</a>
+                    <a href="preferencias">Establecer preferencias</a>
                 </div>
             </fieldset>
         </form>

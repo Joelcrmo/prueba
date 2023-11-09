@@ -5,19 +5,38 @@
     <title>Preferencias por usuario</title>
     <link href="/estilo.css" rel="stylesheet" type="text/css">
 </head>
+<php
+session_start();
+if(isset($_GET['enviar'])){
+    $_SESSION['idioma'] = $_GET['idioma'];
+    $_SESSION['perfpublico'] = $_GET['perfpublico'];
+    $_SESSION['zonahoraria'] = $_GET['zonahoraria'];
+
+    $mensaje = 'Información guardada en la sesión.';
+
+}
+
+?>
 <body>
     <div id='preferencias'>
-        <form action='' method='post'>
+        <form action='' method='get'>
             <fieldset>
                 <legend>Preferencias</legend>
                 <div><span class='mensaje'>
+                <div><span class='mensaje'>
+                    <php
+                    if(isset($mensaje)){
+                        echo $mensaje;
+                    }
+                    ?>
+                </span></div>
                     <?php
 
                     // Comprobar si se ha enviado el formulario
-                    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                        $idioma = $_POST['idioma'];
-                        $perfpublico = $_POST['perfpublico'];
-                        $zonahoraria = $_POST['zonahoraria'];
+                    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+                        $idioma = $_GET['idioma'];
+                        $perfpublico = $_GET['perfpublico'];
+                        $zonahoraria = $_GET['zonahoraria'];
 
                         // Almacenar las preferencias en la sesión
                         $_SESSION['preferencias'] = [
@@ -40,7 +59,15 @@
                 $perfpublicoSeleccionado = $preferencias['perfpublico'] ?? '';
                 $zonahorariaSeleccionada = $preferencias['zonahoraria'] ?? '';
                 ?>
+
                 <div class='campo'>
+                <div><span class='mensaje'>
+                    <php
+                    if(isset($mensaje)){
+                        echo $mensaje;
+                    }
+                    ?>
+                </span></div>
                     <label class='etiqueta' for='idioma'>Idioma:</label><br />
                     <select name='idioma' id='idioma'>
                         <option value='ingles' <?php echo ($idiomaSeleccionado === 'ingles') ? 'selected' : ''; ?>>Inglés</option>
@@ -71,7 +98,7 @@
                     <input type='submit' name='enviar' value='Establecer preferencias' />
                 </div>
                 <div class='campo'>
-                    <a href="mostrar.php">Mostrar preferencias</a>
+                    <a href="mostrar">Mostrar preferencias</a>
                 </div>
             </fieldset>
         </form>
